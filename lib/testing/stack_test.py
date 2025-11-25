@@ -1,4 +1,4 @@
-from Stack import Stack
+from lib.Stack import Stack
 
 class TestStack:
     '''Class Stack in Stack.py'''
@@ -47,12 +47,16 @@ class TestStack:
     def test_full(self):
         '''Test Stack full() method'''
         stk = Stack([1], 1)
-
         assert(stk.full())
         assert(stk.size() == 1)
         assert(stk.pop() == 1)
         stk.push(1)
-        stk.push(2)
+        try:
+            stk.push(2)
+            full_push_success = True
+        except OverflowError:
+            full_push_success = False
+        assert(full_push_success == False)
         assert(stk.full())
         assert(stk.size() == 1)
         assert(stk.pop() == 1)
